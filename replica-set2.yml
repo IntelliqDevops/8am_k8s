@@ -1,0 +1,36 @@
+---
+
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata:
+  name: httpd-rs
+  namespace: test-ns
+  labels:
+    type: webserver
+    author: intelliqit
+spec:
+  
+  selector:
+    matchLabels:
+      type: webserver
+  replicas: 3
+  template:
+    metadata:
+      name: httpd-pod
+      labels:
+        type: webserver
+    spec:
+      containers:
+        - name: myhttpd
+          image: httpd
+          ports:
+           - containerPort: 80
+             hostPort: 8080
+...
+
+
+
+
+
+
+
