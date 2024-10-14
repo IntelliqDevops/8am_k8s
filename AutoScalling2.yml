@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels:
+      run: proxy
+  template:
+    metadata:
+      name:  nginx-pod
+      labels:
+        run: proxy
+    spec:
+      containers:
+        - name: nginx
+          image: nginx 
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 300m
+            limits:
+              cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    run: proxy
+spec:
+  ports:
+    - port: 80
+  selector:
+    run: proxy
+...
+
+
+
+
